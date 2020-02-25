@@ -46,6 +46,8 @@ hold on
 figure(4)
 hold on
 
+
+
 cutoff = 0.06;
 
 for i = 1:4
@@ -57,7 +59,7 @@ for i = 1:4
     plot(z_vel{i})
     figure(3)
     plot(z_pos{i})
-    pos_low = lowpass(us, cutoff);
+    [pos_low, d] = lowpass(us, cutoff);
     pos_high = highpass(z_pos{i}, cutoff);
     pos_comp = pos_low(intervals{i}) + pos_high;
     figure(4)
