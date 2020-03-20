@@ -42,8 +42,8 @@ def read_button(pin, value):
 
 @blynk.handle_event('write V2')
 def read_image(pin, value):
-	if button_state == 1:
-		blynk.virtual_write(2, 1) # training in progress image
+    if button_state == 1:
+	blynk.virtual_write(2, 1) # training in progress image
     elif button_state == 0: 
     	blynk.virtual_write(2, 2) # workout image
 
