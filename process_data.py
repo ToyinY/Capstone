@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat Feb 22 19:43:55 2020
-
 @author: riley
 """
 import pandas as pd
@@ -23,6 +22,8 @@ intervals = {'marissa_row_low': np.arange(734, 835),
              'marissa_row_high': np.arange(979, 1080),
              'marissa_row_no_pause': np.arange(1104, 1205)}
 
+fig = plt.figure() # generate plot as figure
+
 for name, inter in intervals.items():
     z_acc = data.z[inter] - data.z[inter[0]]
     thresh = np.std(z_acc)
@@ -41,3 +42,5 @@ for name, inter in intervals.items():
     plt.xlabel('samples (2Hz)')
     plt.ylabel('displacement (m)')
     plt.legend(intervals.keys())
+
+fig.savefig('workout.png') 
