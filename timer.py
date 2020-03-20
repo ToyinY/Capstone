@@ -14,11 +14,11 @@ BLYNK_AUTH= "zUKQOvF40FkXYUg6VCh2uQd7N3gZZCxA"
 blynk = blynklib.Blynk(BLYNK_AUTH)
 
 
-#Error Message
+# Error Message
 WRITE_EVENT_PRINT_MSG = "[WRITE_VIRTUAL_WRITE] Pin V{} Value: '{}' "
 READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
 
-#Setup I2C for Accelerometer
+# Setup I2C for Accelerometer
 i2c = busio.I2C(board.SCL, board.SDA)
 sensor = adafruit_mma8451.MMA8451(i2c) 
 
@@ -39,6 +39,13 @@ def read_button(pin, value):
     global button_state
     button_state = int(value[0])
     #print(button_state)
+
+@blynk.handle_event('write V2')
+def read_image(pin, value):
+	if button_state == 1:
+		blynk.virtual_write(2, 1) # training in progress image
+    elif button_state == 0: 
+    	blynk.virtual_write(2, 2) # workout image
 
 @timer.register(vpin_num=0, interval=1, run_once= False)
 def elapsed_timer(vpin_num=0):
